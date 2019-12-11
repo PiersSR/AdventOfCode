@@ -17,6 +17,8 @@ namespace AdventOfCode
             fuelCalculator.CalculateExtraFuelNeeded(massValues, 0, 0);
             Console.WriteLine($"Day 1 Part 2: \n\t Extra Fuel Requirement: {fuelCalculator.totalExtraFuelRequirement}");
 
+            OpCodeProcessor opCodeProcessor = new OpCodeProcessor();
+            Console.WriteLine($"Day 2 Part 1: \n\t Opcode Result: {opCodeProcessor.ProcessOpCodes()}");
             Console.ReadKey();
         }
     }
