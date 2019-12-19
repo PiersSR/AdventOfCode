@@ -34,42 +34,37 @@ namespace AdventOfCode
 
 		private void InterpretValues(List<int> values)
 		{
-			int storagePoint;
-
 			for (int pointer = 0; pointer <= values.Count; pointer += 4)
 			{
-				storagePoint = pointer + 3;
+				int opCode = values[pointer];
+				int value1 = values[pointer + 1];
+				int value2 = values[pointer + 2];
+				int storagePoint = values[pointer + 3];
 
-				int result = DecodeOpCode(values[pointer], pointer, values);
-
-				if (result == HALT_CODE)
+				if (opCode == HALT_CODE)
 					return;
-				else
-					WriteResult(storagePoint, result, values);
+
+				DecodeValues(opCode, storagePoint, value1, value2, values);
 			}
 		}
 
-		private void WriteResult(int storagePoint, int result, List<int> values)
+		private int WriteResult(int storagePoint, int result, List<int> values)
 		{
-			values[storagePoint] = result;
+			return values[storagePoint] = result;
 		}
 
-		private int DecodeOpCode(int opCode, int pointer, List<int> values)
+		private int DecodeValues(int opCode, int storagePoint, int value1, int value2, List<int> values)
 		{
-			int value1 = values[pointer + 1];
-			int value2 = values[pointer + 2];
-
 			switch (opCode)
 			{
-
 				case 1:
-					return AddValues(value1, value2);
+					return WriteResult(storagePoint, AddValues(value1, value2), values);
 				case 2:
-					return MultiplyValues(value1, value2);
+					return WriteResult(storagePoint, MultiplyValues(value1, value2), values);
 				case 99:
 					return 99;
 				default:
-					return 99;
+					return 1000;
 			}
 		}
 
