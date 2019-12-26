@@ -7,9 +7,9 @@ namespace AdventOfCode
 {
     public class FuelCalculator
     {
-        int totalFuelRequirement = 0;
-        public int totalExtraFuelRequirement = 0;
-        int lineCounter = 0;
+        int TotalFuelRequirement = 0;
+        public int TotalExtraFuelRequirement = 0;
+        int LineCounter = 0;
 
         /// <summary>
         /// Calculate the fuel needed from the given mass values
@@ -19,26 +19,26 @@ namespace AdventOfCode
             foreach(string lineValue in massValues)
             {
                 int massValue = int.Parse(lineValue);
-                totalFuelRequirement += (massValue / 3) - 2;
+                TotalFuelRequirement += (massValue / 3) - 2;
             }
 
-            return totalFuelRequirement;
+            return TotalFuelRequirement;
         }
 
         public void CalculateExtraFuelNeeded(string[] lineValues, int fuelNeeded, int iteration)
         {
-            if (((fuelNeeded <= 0) && (lineCounter < lineValues.Length - 1)) || iteration == 0)
+            if (((fuelNeeded <= 0) && (LineCounter < lineValues.Length - 1)) || iteration == 0)
             {
-                fuelNeeded = iteration == 0 ? int.Parse(lineValues[lineCounter]) : int.Parse(lineValues[++lineCounter]);
+                fuelNeeded = iteration == 0 ? int.Parse(lineValues[LineCounter]) : int.Parse(lineValues[++LineCounter]);
             }
             
-            if((fuelNeeded > 0) && (lineCounter < lineValues.Length))
+            if((fuelNeeded > 0) && (LineCounter < lineValues.Length))
             {
                 fuelNeeded = (fuelNeeded / 3) - 2;
                 iteration++;
 
                 if(fuelNeeded > 0)
-                    totalExtraFuelRequirement += fuelNeeded;
+                    TotalExtraFuelRequirement += fuelNeeded;
 
                 CalculateExtraFuelNeeded(lineValues, fuelNeeded, iteration);
             }
